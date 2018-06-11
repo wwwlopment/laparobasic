@@ -4,9 +4,9 @@
 /* @var $content string */
 
 use yii\helpers\Html;
-/*use yii\bootstrap\Nav;
+use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;*/
+/*use yii\widgets\Breadcrumbs;*/
 use app\assets\MainAsset;
 //use common\widgets\Alert;
 
@@ -94,10 +94,20 @@ MainAsset::register($this);
                         <li><a href="#price">Запис на прийом</a></li>
                         <li><a href="#contact">Хочу запитати</a></li>
                         <li><a href="#footer">Контакти</a></li>
+
+             <!--           --><?php /*NavBar::begin(); echo Nav::widget(['items' => [
+                        ['label' => 'Реєстрація', 'url' => ['/site/signup']]]]);
+                        NavBar::end();*/?>
                     </ul>
                 </nav>
 				<!-- /main nav -->
-				
+                <ul>
+
+                <li><a href="/site/signup">реєстрація</a></li>
+                <li><a href="/site/login">вхід</a></li>
+                   <!-- --><?php /* '<pre>'.print_r(Yii::$app->user).'</pre>';*/?>
+
+                </ul>
             </div>
         </header>
         <!--

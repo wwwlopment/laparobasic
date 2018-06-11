@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -9,6 +10,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\SignupForm;
 
 class SiteController extends Controller
 {
@@ -54,6 +56,8 @@ class SiteController extends Controller
         ];
     }
 
+
+
     /**
      * Displays homepage.
      *
@@ -66,26 +70,56 @@ class SiteController extends Controller
       return $this->render('first');
     }
 
+  public function actionSignup() {
+    $model = new SignupForm();
+
+    if (Yii::$app->request->isPost) {
+      $model->load(Yii::$app->request->post());
+     if ($model->signup()) {
+       return $this->redirect(['login']);
+     }
+
+    }
+    return $this->render('signup', ['model'=>$model]);
+  }
+
     /**
      * Login action.
      *
      * @return Response|string
      */
-    public function actionLogin()
-    {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
+    public function actionLogin() {
+      /*      if(!Yii::$app->user->isGuest)
+            {
+              return $this->goHome();
+            }
+            $login_model = new Login();
+            if( Yii::$app->request->post('Login'))
+            {
+              $login_model->attributes = Yii::$app->request->post('Login');
+              if($login_model->validate())
+              {
+                Yii::$app->user->login($login_model->getUser());
+                return $this->goHome();
+              }
+            }
+            return $this->render('login',['login_model'=>$login_model]);
+          }*/
 
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        }
 
-        $model->password = '';
-        return $this->render('login', [
-            'model' => $model,
-        ]);
+      if (!Yii::$app->user->isGuest) {
+        return $this->goHome();
+      }
+
+      $model = new LoginForm();
+      if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        return $this->goBack();
+      }
+
+      $model->password = '';
+      return $this->render('login', [
+        'model' => $model,
+      ]);
     }
 
     /**
@@ -118,13 +152,4 @@ class SiteController extends Controller
         ]);
     }
 
-    /**
-     * Displays about page.
-     *
-     * @return string
-     */
-    public function actionAbout()
-    {
-        return $this->render('about');
-    }
 }
