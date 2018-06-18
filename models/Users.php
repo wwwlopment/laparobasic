@@ -25,7 +25,7 @@ class Users extends ActiveRecord implements IdentityInterface {
 
   public $id;
   public $username;
-  public $password;
+  public $pass;
   public $authKey;
   public $accessToken;
 
@@ -33,14 +33,14 @@ class Users extends ActiveRecord implements IdentityInterface {
     '100' => [
       'id' => '100',
       'username' => 'admin',
-      'password' => 'admin',
+      'pass' => 'admin',
       'authKey' => 'test100key',
       'accessToken' => '100-token',
     ],
     '101' => [
       'id' => '101',
       'username' => 'demo',
-      'password' => 'demo',
+      'pass' => 'demo',
       'authKey' => 'test101key',
       'accessToken' => '101-token',
     ],

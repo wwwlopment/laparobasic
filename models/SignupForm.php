@@ -20,14 +20,17 @@ class SignupForm extends Model {
 
   public function rules() {
     return [
-      [['login', 'email', 'pass', 'sex', 'name'], 'required'],
-      [['login'], 'string'],
+      [['login', 'email', 'pass', 'sex', 'name'], 'required', 'message'=>'Поле не може бути порожнім'],
+      [['login'], 'trim'],
+      [['login'], 'required'],
+      [['login'], 'string', 'min' => 2, 'max' => 255],
+      [['login'], 'unique', 'targetClass'=>'app\models\Users', 'targetAttribute'=>'login'],
       [['name'], 'string'],
       [['surname'], 'string'],
       [['birthday'], 'date'],
       [['sex'], 'string'],
       [['photo'], 'string'],
-      [['email'], 'unique', 'targetClass'=>'app\models\Users', 'targetAttribute'=>'email'],
+      [['email'], 'unique', 'targetClass'=>'app\models\Users', 'targetAttribute'=>'email', 'message'=>'Такий емейл вже був зареєстрований'],
     ];
   }
 

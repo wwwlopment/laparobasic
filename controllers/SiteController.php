@@ -116,7 +116,7 @@ class SiteController extends Controller
         return $this->goBack();
       }
 
-      $model->password = '';
+      $model->pass = '';
       return $this->render('login', [
         'model' => $model,
       ]);
